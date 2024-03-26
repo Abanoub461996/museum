@@ -8,47 +8,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 // Styles
 import { LandingPageWrapper } from "./Landing.styles";
+import { Link } from "react-router-dom";
 
-const LandingPage = () => {
+const LandingPage = ({ galleryData }) => {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollToPlugin);
   const selectAll = (e) => document.querySelectorAll(e);
-
-  const {
-    data: galleryData,
-    isLoading,
-    isFetched,
-  } = useQuery({
-    queryKey: [`images-van-Gogh`],
-    queryFn: async () => {
-      return await axiosInstance.get(
-        `/artworks/search?query[term][is_public_domain]=true&&limit=100&&fields=id,title,image_id,artist_display,artwork_type_title`
-      );
-    },
-    select: (res) => {
-      const uniqueArtworks = res.data.data.reduce((uniqueArtworks, el) => {
-        // Check if an artwork with the same title already exists in the uniqueArtworks array
-        const existingArtwork = uniqueArtworks.find(
-          (artwork) => artwork.artwork_type_title === el.artwork_type_title
-        );
-
-        // If the artwork does not exist in the uniqueArtworks array, add it
-        if (!existingArtwork) {
-            console.log("adding");
-            
-          uniqueArtworks.push({
-            ...el,
-            url: `${res.data.config.iiif_url}/${el.image_id}/full/843,/0/default.jpg`,
-          });
-        }
-
-        return uniqueArtworks;
-      }, []);
-      return uniqueArtworks;
-    },
-  });
-  const stage = useRef<HTMLDivElement>(null);
-  const slides = selectAll(".slide");
-  const links = selectAll(".slide__scroll-link");
-  const titles = selectAll(".col__content-title");
 
   function initHeader() {
     // animate the logo and fake burger button into place
@@ -68,22 +33,16 @@ const LandingPage = () => {
 
     let tl = gsap.timeline({ delay: 1.2 });
 
-    tl.from(".intro-slide", {
-      // x: 100,
-      y: 400,
-      ease: "power4",
-      duration: 3,
-    })
-      .from(
-        ".intro__txt",
-        {
-          x: -100,
-          opacity: 0,
-          ease: "power4",
-          duration: 3,
-        },
-        0.7
-      )
+    tl.from(
+      ".intro__txt",
+      {
+        x: -100,
+        opacity: 0,
+        ease: "power4",
+        duration: 3,
+      },
+      0.7
+    )
       .from(
         ".intro__img--1",
         {
@@ -135,7 +94,7 @@ const LandingPage = () => {
       );
   }
 
-  function initSlides() {
+  function initSlides(slides) {
     // Animation of each slide scrolling into view
     slides.forEach((slide, i) => {
       let tl = gsap.timeline({
@@ -203,230 +162,119 @@ const LandingPage = () => {
           1.4
         );
     });
-
-    // External footer link scroll animation
-    gsap.from(".footer__link", {
-      scrollTrigger: {
-        trigger: ".footer",
-        scrub: 2,
-        start: "50% 100%", // position of trigger meets the scroller position
-        end: "0% 0%",
-        toggleActions: "play reverse play reverse", // Animation plays when entering and reversing when leaving
-      },
-      y: "20vh",
-      ease: "sine",
-    });
   }
+  const stage = useRef<HTMLDivElement>(null);
   useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.registerPlugin(ScrollToPlugin);
-    gsap.set(stage, { autoAlpha: 1 });
+    const slides = selectAll(".slide");
+    // gsap.set(stage, { autoAlpha: 1 });
     initHeader();
     initIntro();
-    initSlides();
+    initSlides(slides);
   });
 
   return (
     <LandingPageWrapper>
-      {isFetched && (
-        <div id="smooth-wrapper">
-          <div className="stage" id="smooth-content" ref={stage}>
-            <header className="header">
-              <div className="logo">MuseuM</div>
-            </header>
+      <div id="smooth-wrapper">
+        <div className="stage" id="smooth-content" ref={stage}>
+          <header className="header">
+            <div className="logo">MuseuM</div>
+          </header>
 
-            <section className="intro slide--0" id="slide-0">
-              <div className="intro__content">
-                <h1 className="intro__title">MuseuM</h1>
-                <p className="intro__txt">
-                  Duda is going from strength to strength. Whether it’s in the
-                  prestigious gallery in the new World Trade Centre in New York
-                  or at an international art fair in Chicago or Hong Kong,
-                  people recognize the original response to life in Duda’s work,
-                  and go away feeling animated and energized by his vibrant
-                  creations.
-                </p>
-              </div>
-              <img
-                className="intro__img intro__img--1"
-                src={galleryData[0].url}
-              />
-              <img
-                className="intro__img intro__img--2"
-                src={galleryData[7].url}
-              />
-            </section>
-
-            <section className="slide slide--1" id="slide-1">
-              <div className="col col--1">
-                <div className="col__content col__content--1">
-                  <h2 className="col__content-title">
-                    <span className="line__inner">
-                      {galleryData[1].artwork_type_title}
-                    </span>
-                  </h2>
-                  <div className="col__content-wrap">
-                    <p
-                      className="col__content-txt"
-                    ></p>
-                    <a href="#" className="slide-link">
-                      <div className="slide-link__circ"></div>
-                      <div className="slide-link__line"></div>
+          <section className="intro slide--0" id="slide-0">
+            <div className="intro__content">
+              <h1 className="intro__title">MuseuM</h1>
+              <p className="intro__txt">
+                Duda is going from strength to strength. Whether it’s in the
+                prestigious gallery in the new World Trade Centre in New York or
+                at an international art fair in Chicago or Hong Kong, people
+                recognize the original response to life in Duda’s work, and go
+                away feeling animated and energized by his vibrant creations.
+              </p>
+            </div>
+            <img
+              className="intro__img intro__img--1"
+              src={galleryData[0].url}
+            />
+            <img
+              className="intro__img intro__img--2"
+              src={galleryData[7].url}
+            />
+          </section>
+          {galleryData.map((artPiece, i) => {
+            if (i % 2) {
+              return (
+                <section
+                  className={`slide slide--${i + 1}`}
+                  id={`slide--${i + 1}`}
+                >
+                  <div className="col w-[50%] col--1">
+                    <div className="col__image-wrap">
+                      <img className="img img--1" src={galleryData[i].url} />
+                    </div>
+                    <a href="#slide-2" className="slide__scroll-link">
+                      <div className="slide__scroll-line"></div>
                     </a>
                   </div>
-                </div>
-                <a href="#slide-2" className="slide__scroll-link">
-                  <div className="slide__scroll-line"></div>
-                </a>
-              </div>
-              <div className="col col--2">
-                <div className="col__image-wrap">
-                  <img className="img img--1" src={galleryData[1].url} />
-                </div>
-              </div>
-            </section>
-            <section className="slide slide--2" id="slide-2">
-              <div className="col col--1">
-                <div className="col__content col__content--2">
-                  <h2 className="col__content-title">
-                    <span className="line__inner">
-                      {galleryData[2].artwork_type_title}
-                    </span>
-                  </h2>
-                  <div className="col__content-wrap">
-                    <p
-                      className="col__content-txt"
-                    ></p>
-                    <a href="#" className="slide-link">
-                      <div className="slide-link__circ"></div>
-                      <div className="slide-link__line"></div>
+                  <div className="col w-[50%] col--2">
+                    <div className="col__content col__content--1">
+                      <h2 className="col__content-title">
+                        <span className="line__inner">
+                          {galleryData[i].artwork_type_title}s
+                        </span>
+                      </h2>
+                      <div className="col__content-wrap">
+                        <p className="col__content-txt"></p>
+                        <Link
+                          to={`artwork_type/${galleryData[i].artwork_type_id}`}
+                          className="slide-link"
+                        >
+                          <div className="slide-link__circ"></div>
+                          <div className="slide-link__line"></div>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              );
+            } else {
+              return (
+                <section
+                  className={`slide slide--${i + 1}`}
+                  id={`slide--${i + 1}`}
+                >
+                  <div className="col w-[50%] col--1">
+                    <div className="col__content col__content--2">
+                      <h2 className="col__content-title">
+                        <span className="line__inner">
+                          {galleryData[i].artwork_type_title}s
+                        </span>
+                      </h2>
+                      <div className="col__content-wrap">
+                        <p className="col__content-txt"></p>
+                        <Link
+                          to={`artwork_type/${galleryData[i].artwork_type_id}`}
+                          className="slide-link"
+                        >
+                          <div className="slide-link__circ"></div>
+                          <div className="slide-link__line"></div>
+                        </Link>
+                      </div>
+                    </div>
+                    <a href="#slide-3" className="slide__scroll-link">
+                      <div className="slide__scroll-line"></div>
                     </a>
                   </div>
-                </div>
-                <a href="#slide-3" className="slide__scroll-link">
-                  <div className="slide__scroll-line"></div>
-                </a>
-              </div>
-              <div className="col col--2">
-                <div className="col__image-wrap">
-                  <img className="img img--1" src={galleryData[2].url} />
-                </div>
-              </div>
-            </section>
-            <section className="slide slide--3" id="slide-3">
-              <div className="col col--1">
-                <div className="col__content col__content--3">
-                  <h2 className="col__content-title">
-                    {galleryData[3].artwork_type_title}
-                  </h2>
-                  <div className="col__content-wrap">
-                    <p
-                      className="col__content-txt"
-                    ></p>
-                    <a href="#" className="slide-link">
-                      <div className="slide-link__circ"></div>
-                      <div className="slide-link__line"></div>
-                    </a>
+                  <div className="col w-[50%] col--2">
+                    <div className="col__image-wrap">
+                      <img className="img img--1" src={galleryData[i].url} />
+                    </div>
                   </div>
-                </div>
-                <a href="#slide-7" className="slide__scroll-link">
-                  <div className="slide__scroll-line"></div>
-                </a>
-              </div>
-              <div className="col col--2">
-                <div className="col__image-wrap">
-                  <img className="img img--1" src={galleryData[3].url} />
-                </div>
-              </div>
-            </section>
-
-            <section className="slide slide--4" id="slide-4">
-              <div className="col col--1">
-                <div className="col__content col__content--4">
-                  <h2 className="col__content-title">
-                    <span className="line__inner">
-                      {galleryData[4].artwork_type_title}
-                    </span>
-                  </h2>
-                  <div className="col__content-wrap">
-                    <p
-                      className="col__content-txt"
-                    ></p>
-                    <a href="#" className="slide-link">
-                      <div className="slide-link__circ"></div>
-                      <div className="slide-link__line"></div>
-                    </a>
-                  </div>
-                </div>
-                <a href="#slide-4" className="slide__scroll-link">
-                  <div className="slide__scroll-line"></div>
-                </a>
-              </div>
-              <div className="col col--2">
-                <div className="col__image-wrap">
-                  <img className="img img--1" src={galleryData[4].url} />
-                </div>
-              </div>
-            </section>
-
-            <section className="slide slide--5" id="slide-5">
-              <div className="col col--1">
-                <div className="col__content col__content--5">
-                  <h2 className="col__content-title">
-                    <span className="line__inner">
-                      {galleryData[5].artwork_type_title}
-                    </span>
-                  </h2>
-                  <div className="col__content-wrap">
-                    <p
-                      className="col__content-txt"
-                    ></p>
-                    <a href="#" className="slide-link">
-                      <div className="slide-link__circ"></div>
-                      <div className="slide-link__line"></div>
-                    </a>
-                  </div>
-                </div>
-                <a href="#slide-5" className="slide__scroll-link">
-                  <div className="slide__scroll-line"></div>
-                </a>
-              </div>
-              <div className="col col--2">
-                <div className="col__image-wrap">
-                  <img className="img img--1" src={galleryData[5].url} />
-                </div>
-              </div>
-            </section>
-
-            <section className="slide slide--6" id="slide-6">
-              <div className="col col--1">
-                <div className="col__content col__content--6">
-                  <h2 className="col__content-title">
-                    {galleryData[6].artwork_type_title}
-                  </h2>
-                  <div className="col__content-wrap">
-                    <p
-                      className="col__content-txt"
-                    ></p>
-                    <a href="#" className="slide-link">
-                      <div className="slide-link__circ"></div>
-                      <div className="slide-link__line"></div>
-                    </a>
-                  </div>
-                </div>
-                <a href="#slide-6" className="slide__scroll-link">
-                  <div className="slide__scroll-line"></div>
-                </a>
-              </div>
-              <div className="col col--2">
-                <div className="col__image-wrap">
-                  <img className="img img--1" src={galleryData[6].url} />
-                </div>
-              </div>
-            </section>
-          </div>
+                </section>
+              );
+            }
+          })}
         </div>
-      )}
+      </div>
     </LandingPageWrapper>
   );
 };

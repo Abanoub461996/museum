@@ -1,6 +1,6 @@
 import { Outlet, createBrowserRouter, useLocation } from "react-router-dom";
 import MainLayout from "../../Layouts/MainLayout";
-import LandingPage from "../../pages/Landing/Landing";
+import LandingPageWrapper from "../../pages/Landing/LandingPageWrapper";
 
 const router = createBrowserRouter([
   {
@@ -10,7 +10,16 @@ const router = createBrowserRouter([
         <Outlet />
       </MainLayout>
     ),
-    children: [{ index: true, element: <LandingPage /> }],
+    children: [
+      { index: true, element: <LandingPageWrapper /> },
+      {
+        path: "artwork_type",
+        element: <Outlet />,
+        children: [
+          { path: ":id", element: <LandingPageWrapper /> },
+        ],
+      },
+    ],
   },
 ]);
 

@@ -28,25 +28,7 @@ export const LandingPageWrapper = styled.div`
     letter-spacing: -1px;
   }
 
-  .nav-btn,
-  .nav-btn__svg {
-    width: 56px;
-    height: 30px;
-  }
 
-  .nav-btn {
-    display: block;
-    margin: -2px 0 0 56px;
-  }
-  @media all and (max-width: 768px) {
-    .nav-btn {
-      margin: 18px 0 0 -6px;
-    }
-  }
-
-  .nav-btn__svg {
-    pointer-events: none;
-  }
 
   /*  ========================================================================== 
     Intro
@@ -161,7 +143,7 @@ export const LandingPageWrapper = styled.div`
   @media all and (max-width: 768px) {
     .col {
       display: block;
-      width: 100%;
+      width: 100%!important;
       height: 100vh;
     }
   }
@@ -266,13 +248,11 @@ export const LandingPageWrapper = styled.div`
     ========================================================================== */
   .col__content-title {
     margin: 0 0 2vw;
-    font-size: 11vw;
-    letter-spacing: -0.8vw;
+    font-size: 5vw;
   }
   @media all and (max-width: 768px) {
     .col__content-title {
       margin: 0 0 6vw;
-      font-size: 18vw;
     }
   }
 
