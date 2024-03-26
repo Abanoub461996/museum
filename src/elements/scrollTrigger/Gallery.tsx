@@ -1,0 +1,101 @@
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axiosInstance from "../../services/api/axiosInstance";
+
+const Gallery = () => {
+  gsap.registerPlugin(ScrollTrigger);
+
+
+  const {
+    data: galleryData,
+    isLoading,
+    isFetched,
+  } = useQuery({
+    queryKey: [`images-van-Gogh`],
+    queryFn: async () => {
+      return await axiosInstance.get(`/artworks?fields=id,title,image_id`);
+    },
+    select: (res) => {
+      return res.data;
+    },
+  });
+
+
+  useEffect(() => {
+    if (!isLoading && isFetched) {
+      const size = Math.max(innerWidth, innerHeight);
+      gsap.set(".gridBlock", {
+        backgroundImage: (i) =>
+          `url(${galleryData.config.iiif_url}/${galleryData.data[i].image_id}/full/${size},/0/default.jpg)`,
+      });
+
+      const bigImg = new Image();
+      bigImg.addEventListener("load", function () {
+        gsap.to(".centerPiece .gridBlock", { autoAlpha: 1, duration: 0.5 });
+      });
+
+      bigImg.src = `https://www.artic.edu/iiif/2/2193cdda-2691-2802-0776-145dee77f7ea/full/823,/0/default.jpg`;
+    }
+  });
+  useGSAP(() => {
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".grid-container",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+          pin: ".grid",
+          anticipatePin: 1,
+          //   markers: true,
+        },
+      })
+      .set(".gridBlock:not(.centerBlock)", { autoAlpha: 0 })
+      .to(
+        ".gridBlock:not(.centerBlock)",
+        { duration: 0.1, autoAlpha: 1 },
+        0.001
+      )
+      .from(".gridLayer", {
+        scale: 3.3333,
+        ease: "none",
+      });
+  });
+  return (
+    <>
+      <div className="grid-container">
+        <div className="grid">
+          <div className="gridLayer">
+            <div className="gridBlock"></div>
+          </div>
+          <div className="gridLayer">
+            <div className="gridBlock"></div>
+          </div>
+          <div className="gridLayer">
+            <div className="gridBlock"></div>
+          </div>
+          <div className="gridLayer centerPiece">
+            <div className="gridBlock centerBlock"></div>
+          </div>
+
+          <div className="gridLayer">
+            <div className="gridBlock"></div>
+          </div>
+          <div className="gridLayer">
+            <div className="gridBlock"></div>
+          </div>
+          <div className="gridLayer">
+            <div className="gridBlock"></div>
+          </div>
+          <div className="gridLayer">
+            <div className="gridBlock"></div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+export default Gallery;

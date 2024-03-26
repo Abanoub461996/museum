@@ -1,0 +1,178 @@
+
+
+.massiveImage {
+  height: 100vh;
+  width: 400vw;
+  background-size: cover;
+  background-position: center;
+}
+
+/* PARALLAX HEADER */
+
+body {
+  padding: 0;
+  margin: 0;
+  /* background-color: #130d0a; */
+  font-family: "Playfair Display", serif;
+  color: #fff;
+}
+
+#hero {
+  height: 800px;
+  overflow: hidden;
+  position: relative;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+#content {
+  background-color: #130d0a;
+  position: relative;
+}
+.layer {
+  background-position: bottom center;
+  background-size: auto;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 600px;
+  position: fixed;
+  z-index: -1;
+}
+
+#hero-mobile {
+  display: none;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/full_illustration.png")
+    no-repeat center bottom / cover;
+  height: 320px;
+}
+
+.first-section {
+  padding: 50px 0 20px 0;
+}
+.text-header {
+  font-size: 50px;
+  text-align: center;
+}
+h1 {
+  line-height: 120%;
+  margin-bottom: 30px!important;
+}
+p {
+  color: #ede0d5;
+  font-size: 18px;
+  line-height: 150%;
+}
+
+#hero,
+.layer {
+  min-height: 800px;
+}
+
+.layer-bg {
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/ilu_bg.jpg");
+}
+.layer-1 {
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/ilu_03.png");
+  background-position: left bottom;
+}
+.layer-2 {
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/ilu_02.png");
+}
+.layer-3 {
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/ilu_man.png");
+  background-position: right bottom;
+}
+.layer-4 {
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/ilu_01.png");
+}
+.layer-overlay {
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/ilu_overlay.png");
+}
+
+@media only screen and (max-width: 768px) {
+  .layer-1 {
+    background-position: 26% bottom;
+  }
+  .layer-3 {
+    background-position: 35% bottom;
+  }
+}
+
+
+/* PARALLAX SECTION */
+a {
+  color: #555;
+  font-weight: 400;
+}
+
+.pSection {
+  position: relative;
+  padding-top: 200px;
+  padding-bottom: 300px;
+}
+
+.container {
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1070px;
+  position: relative;
+  z-index: 1;
+}
+
+.pContent {
+  width: 65%;
+  background-color: rgba(78,152,21,0.8);
+  color: white;
+  padding: 40px 60px;
+}
+
+.pImage {
+  width: 70%;
+  position: absolute;
+  top: 20%;
+  right: 0;
+  max-height: 900px;
+}
+
+
+:root {
+  --dark: #242423;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+body {
+    background-color: white;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 14px;
+    color: var(--dark);
+    line-height: 1.3;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .logo,
+  h1,
+  h2 {
+    margin: 0;
+    line-height: 1;
+    font-family: "Cinzel", serif;
+    font-weight: 400;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  
