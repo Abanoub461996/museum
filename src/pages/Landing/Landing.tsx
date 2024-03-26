@@ -206,6 +206,7 @@ const LandingPage = ({ galleryData }) => {
                 <section
                   className={`slide slide--${i + 1}`}
                   id={`slide--${i + 1}`}
+                  key={galleryData[i].artwork_type_id}
                 >
                   <div className="col w-[50%] col--1">
                     <div className="col__image-wrap">
@@ -241,6 +242,7 @@ const LandingPage = ({ galleryData }) => {
                 <section
                   className={`slide slide--${i + 1}`}
                   id={`slide--${i + 1}`}
+                  key={galleryData[i].artwork_type_id}
                 >
                   <div className="col w-[50%] col--1">
                     <div className="col__content col__content--2">
