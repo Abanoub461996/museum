@@ -100,7 +100,6 @@ const LandingPage = ({ galleryData,introData }) => {
           trigger: slide,
           start: "10% 50%", // position of trigger meets the scroller position
           toggleActions: "play reverse play reverse", // Animation plays when entering and reversing when leaving
-          markers:true
         },
       });
 
@@ -191,11 +190,11 @@ const LandingPage = ({ galleryData,introData }) => {
             </div>
             <img
               className="intro__img intro__img--1"
-              src={introData[1].url}
+              src={introData[1]?.url}
             />
             <img
               className="intro__img intro__img--2"
-              src={introData[0].url}
+              src={introData[0]?.url}
             />
           </section>
           {galleryData.map((artPiece, i) => {

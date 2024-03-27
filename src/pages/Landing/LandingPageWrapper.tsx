@@ -29,29 +29,32 @@ const LandingPageWrapper = () => {
           });
         }
 
-        return uniqueArtworks
+        return uniqueArtworks;
       }, []);
       return uniqueArtworks;
     },
   });
   return (
     <>
-      {(isFetched && !!galleryData?.length) && <LandingPage
-      introData={galleryData.filter((el) =>
-        [
-          "Photograph",
-          "Funerary Object"
-        ].includes(el.artwork_type_title)
+      {isFetched && !!galleryData?.length && (
+        <>
+          <LandingPage
+            introData={galleryData.filter((el) =>
+              ["Photograph", "Funerary Object"].includes(el.artwork_type_title)
+            )}
+            galleryData={galleryData.filter((el) =>
+              [
+                "Painting",
+                "Print",
+                "Architectural fragment",
+                "Drawing and Watercolor",
+              ].includes(el.artwork_type_title)
+            )}
+          />
+
+          <Gallery galleryData={galleryData} />
+        </>
       )}
-      galleryData={galleryData.filter((el) =>
-          [
-            "Painting",
-            "Print",
-            "Architectural fragment",
-            "Drawing and Watercolor",
-          ].includes(el.artwork_type_title)
-        )} />}
-      <Gallery />
     </>
   );
 };

@@ -2,34 +2,32 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import axiosInstance from "../../services/api/axiosInstance";
+// import { useQuery } from "@tanstack/react-query";
+// import axiosInstance from "../../services/api/axiosInstance";
 
-const Gallery = () => {
+const Gallery = ({galleryData}) => {
   gsap.registerPlugin(ScrollTrigger);
 
 
-  const {
-    data: galleryData,
-    isLoading,
-    isFetched,
-  } = useQuery({
-    queryKey: [`images-van-Gogh`],
-    queryFn: async () => {
-      return await axiosInstance.get(`/artworks?fields=id,title,image_id`);
-    },
-    select: (res) => {
-      return res.data;
-    },
-  });
-
-
+  // const {
+  //   data: galleryData,
+  //   isLoading,
+  //   isFetched,
+  // } = useQuery({
+  //   queryKey: [`images-van-Gogh`],
+  //   queryFn: async () => {
+  //     return await axiosInstance.get(`/artworks?fields=id,title,image_id`);
+  //   },
+  //   select: (res) => {
+  //     return res.data;
+  //   },
+  // });
   useEffect(() => {
-    if (!isLoading && isFetched) {
-      const size = Math.max(innerWidth, innerHeight);
+   {
+      // const  size = Math.max(innerWidth, innerHeight);
       gsap.set(".gridBlock", {
         backgroundImage: (i) =>
-          `url(${galleryData.config.iiif_url}/${galleryData.data[i].image_id}/full/${size},/0/default.jpg)`,
+          `url(${galleryData[i].url})`,
       });
 
       const bigImg = new Image();
@@ -45,12 +43,12 @@ const Gallery = () => {
       .timeline({
         scrollTrigger: {
           trigger: ".grid-container",
-          start: "top top",
+          start: "top bottom",
           end: "bottom top",
           scrub: true,
           pin: ".grid",
           anticipatePin: 1,
-          //   markers: true,
+            markers: true,
         },
       })
       .set(".gridBlock:not(.centerBlock)", { autoAlpha: 0 })
