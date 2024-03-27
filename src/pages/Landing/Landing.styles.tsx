@@ -28,8 +28,6 @@ export const LandingPageWrapper = styled.div`
     letter-spacing: -1px;
   }
 
-
-
   /*  ========================================================================== 
     Intro
     ========================================================================== */
@@ -59,9 +57,7 @@ export const LandingPageWrapper = styled.div`
 
   .intro__title {
     font-size: 25vw;
-    overflow: hidden;
-    letter-spacing: -2.3vw;
-    padding-right: 2.3vw;
+    letter-spacing: -1vw;
   }
   @media all and (max-width: 768px) {
     .intro__title {
@@ -122,11 +118,8 @@ export const LandingPageWrapper = styled.div`
   .slide {
     display: flex;
     align-items: stretch;
-    height: 100vh;
+    max-height: 100vh;
     overflow: hidden;
-  }
-  .slide:nth-of-type(even) {
-    background: #c4cdc4;
   }
   @media all and (max-width: 768px) {
     .slide {
@@ -143,7 +136,7 @@ export const LandingPageWrapper = styled.div`
   @media all and (max-width: 768px) {
     .col {
       display: block;
-      width: 100%!important;
+      width: 100% !important;
       height: 100vh;
     }
   }
@@ -187,60 +180,6 @@ export const LandingPageWrapper = styled.div`
   @media all and (max-width: 768px) {
     .col__content {
       width: 80%;
-    }
-  }
-
-  .col__content--1 {
-    background: #d8c0c0;
-  }
-  @media all and (max-width: 768px) {
-    .col__content--1 {
-      background: rgba(216, 192, 192, 0.9);
-    }
-  }
-
-  .col__content--2 {
-    background: #cdd5e0;
-  }
-  @media all and (max-width: 768px) {
-    .col__content--2 {
-      background: rgba(205, 213, 224, 0.9);
-    }
-  }
-
-  .col__content--3 {
-    background: #f3d3b0;
-  }
-  @media all and (max-width: 768px) {
-    .col__content--3 {
-      background: rgba(243, 211, 176, 0.9);
-    }
-  }
-
-  .col__content--4 {
-    background: #f8e9e6;
-  }
-  @media all and (max-width: 768px) {
-    .col__content--4 {
-      background: rgba(248, 233, 230, 0.9);
-    }
-  }
-
-  .col__content--5 {
-    background: #d1e2ec;
-  }
-  @media all and (max-width: 768px) {
-    .col__content--5 {
-      background: rgba(209, 226, 236, 0.9);
-    }
-  }
-
-  .col__content--6 {
-    background: #d7cec5;
-  }
-  @media all and (max-width: 768px) {
-    .col__content--6 {
-      background: rgba(215, 206, 197, 0.9);
     }
   }
 
@@ -322,6 +261,7 @@ export const LandingPageWrapper = styled.div`
 
   .line__inner {
     display: block;
+    font-family: Lobster;
   }
 
   .slide__scroll-link {
@@ -348,30 +288,37 @@ export const LandingPageWrapper = styled.div`
     height: 100%;
   }
 
+  .slide--0,
   .slide--0 .slide__scroll-line {
     background: #c0d7d8;
   }
 
+  .slide--1,
   .slide--1 .slide__scroll-line {
     background: #d8c0c0;
   }
 
+  .slide--2,
   .slide--2 .slide__scroll-line {
     background: #cdd5e0;
   }
 
+  .slide--3,
   .slide--3 .slide__scroll-line {
     background: #f3d3b0;
   }
 
+  .slide--4,
   .slide--4 .slide__scroll-line {
     background: #f8e9e6;
   }
 
+  .slide--5,
   .slide--5 .slide__scroll-line {
     background: #d1e2ec;
   }
 
+  .slide--6,
   .slide--6 .slide__scroll-line {
     background: #d7cec5;
   }
@@ -380,17 +327,17 @@ export const LandingPageWrapper = styled.div`
     Column Image
     ========================================================================== */
   .col__image-wrap {
-    position: absolute;
+    position: relative;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
     width: 100%;
-    height: 160vh;
+    /* height: 160vh; */
   }
 
   .img {
-    -o-object-fit: cover;
-    object-fit: cover;
+    -o-object-fit: contain;
+    object-fit: contain;
     width: 100%;
     height: 100%;
   }

@@ -1,0 +1,43 @@
+@font-face {
+  font-family: "Lobster";
+  font-weight: 100;
+  src: local("Lobster"), url("/fonts/Lobster/Lobster-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Paintings";
+  font-weight: 100;
+  src: local("Paintings"),
+    url("/fonts/Butterfly_Kids/ButterflyKids-Regular.ttf");
+}
+@font-face {
+  font-family: 'Truculenta';
+  font-weight: 100;
+  src: local('Truculenta'), url('/fonts/Truculenta/static/Truculenta-Thin.ttf');
+}
+@font-face {
+  font-family: 'Truculenta';
+  font-weight: 300;
+  src: local('Truculenta'), url('/fonts/Truculenta/static/Truculenta-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Truculenta';
+  font-weight: 400;
+  src: local('Truculenta'), url('/fonts/Truculenta/static/Truculenta-Regular.ttf');
+
+}
+
+
+@font-face {
+  font-family: 'Truculenta';
+  font-weight: 700;
+  src: local('Truculenta'), url('/fonts/Truculenta/static/Truculenta-Bold.ttf');
+
+}
+
+@font-face {
+  font-family: 'Truculenta';
+  font-weight: 900;
+  src: local('Truculenta'), url('/fonts/Truculenta/static/Truculenta-Black.ttf');
+}

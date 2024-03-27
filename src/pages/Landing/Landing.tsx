@@ -1,6 +1,4 @@
 import { useRef } from "react";
-import axiosInstance from "../../services/api/axiosInstance";
-import { useQuery } from "@tanstack/react-query";
 // GSAP
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -10,7 +8,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { LandingPageWrapper } from "./Landing.styles";
 import { Link } from "react-router-dom";
 
-const LandingPage = ({ galleryData }) => {
+const LandingPage = ({ galleryData,introData }) => {
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(ScrollToPlugin);
   const selectAll = (e) => document.querySelectorAll(e);
@@ -18,7 +16,7 @@ const LandingPage = ({ galleryData }) => {
   function initHeader() {
     // animate the logo and fake burger button into place
 
-    let tl = gsap.timeline({ delay: 0.5 });
+    const tl = gsap.timeline({ delay: 0.5 });
 
     tl.from(".logo", {
       y: -40,
@@ -31,7 +29,7 @@ const LandingPage = ({ galleryData }) => {
   function initIntro() {
     // animate the intro elements into place
 
-    let tl = gsap.timeline({ delay: 1.2 });
+    const tl = gsap.timeline({ delay: 1.2 });
 
     tl.from(
       ".intro__txt",
@@ -68,7 +66,7 @@ const LandingPage = ({ galleryData }) => {
 
     // set up scrollTrigger animation for the when the intro scrolls out
 
-    let stl = gsap.timeline({
+    const stl = gsap.timeline({
       scrollTrigger: {
         trigger: ".intro",
         scrub: 1,
@@ -96,12 +94,13 @@ const LandingPage = ({ galleryData }) => {
 
   function initSlides(slides) {
     // Animation of each slide scrolling into view
-    slides.forEach((slide, i) => {
-      let tl = gsap.timeline({
+    slides.forEach((slide) => {
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: slide,
-          start: "40% 50%", // position of trigger meets the scroller position
+          start: "10% 50%", // position of trigger meets the scroller position
           toggleActions: "play reverse play reverse", // Animation plays when entering and reversing when leaving
+          markers:true
         },
       });
 
@@ -171,19 +170,18 @@ const LandingPage = ({ galleryData }) => {
     initIntro();
     initSlides(slides);
   });
-
   return (
     <LandingPageWrapper>
       <div id="smooth-wrapper">
         <div className="stage" id="smooth-content" ref={stage}>
           <header className="header">
-            <div className="logo">MuseuM</div>
+            <div className="logo font-lobster">MuseuM</div>
           </header>
 
           <section className="intro slide--0" id="slide-0">
             <div className="intro__content">
-              <h1 className="intro__title">MuseuM</h1>
-              <p className="intro__txt">
+              <h1 className="intro__title font-lobster">MuseuM</h1>
+              <p className="intro__txt font-paintings">
                 Duda is going from strength to strength. Whether it’s in the
                 prestigious gallery in the new World Trade Centre in New York or
                 at an international art fair in Chicago or Hong Kong, people
@@ -193,87 +191,83 @@ const LandingPage = ({ galleryData }) => {
             </div>
             <img
               className="intro__img intro__img--1"
-              src={galleryData[0].url}
+              src={introData[1].url}
             />
             <img
               className="intro__img intro__img--2"
-              src={galleryData[7].url}
+              src={introData[0].url}
             />
           </section>
           {galleryData.map((artPiece, i) => {
-            if (i % 2) {
-              return (
-                <section
-                  className={`slide slide--${i + 1}`}
-                  id={`slide--${i + 1}`}
-                  key={galleryData[i].artwork_type_id}
-                >
-                  <div className="col w-[50%] col--1">
-                    <div className="col__image-wrap">
-                      <img className="img img--1" src={galleryData[i].url} />
-                    </div>
-                    <a href="#slide-2" className="slide__scroll-link">
-                      <div className="slide__scroll-line"></div>
-                    </a>
+            return i % 2 ? (
+              <section
+                className={`slide slide--${i + 1}`}
+                id={`slide--${i + 1}`}
+                key={galleryData[i].artwork_type_id}
+              >
+                <div className="col w-[50%] col--1">
+                  <div className="col__image-wrap">
+                    <img className="img img--1" src={galleryData[i].url} />
                   </div>
-                  <div className="col w-[50%] col--2">
-                    <div className="col__content col__content--1">
-                      <h2 className="col__content-title">
-                        <span className="line__inner">
-                          {galleryData[i].artwork_type_title}s
-                        </span>
-                      </h2>
-                      <div className="col__content-wrap">
-                        <p className="col__content-txt"></p>
-                        <Link
-                          to={`artwork_type/${galleryData[i].artwork_type_id}`}
-                          className="slide-link"
-                        >
-                          <div className="slide-link__circ"></div>
-                          <div className="slide-link__line"></div>
-                        </Link>
-                      </div>
+                  <a href="#slide-2" className="slide__scroll-link">
+                    <div className="slide__scroll-line" />
+                  </a>
+                </div>
+                <div className="col w-[50%] col--2">
+                  <div className="col__content col__content--1">
+                    <h2 className="col__content-title">
+                      <span className="line__inner">
+                        {galleryData[i].artwork_type_title}s
+                      </span>
+                    </h2>
+                    <div className="col__content-wrap">
+                      <p className="col__content-txt"></p>
+                      <Link
+                        to={`artwork_type/${galleryData[i].artwork_type_id}`}
+                        className="slide-link"
+                      >
+                        <div className="slide-link__circ" />
+                        <div className="slide-link__line"></div>
+                      </Link>
                     </div>
                   </div>
-                </section>
-              );
-            } else {
-              return (
-                <section
-                  className={`slide slide--${i + 1}`}
-                  id={`slide--${i + 1}`}
-                  key={galleryData[i].artwork_type_id}
-                >
-                  <div className="col w-[50%] col--1">
-                    <div className="col__content col__content--2">
-                      <h2 className="col__content-title">
-                        <span className="line__inner">
-                          {galleryData[i].artwork_type_title}s
-                        </span>
-                      </h2>
-                      <div className="col__content-wrap">
-                        <p className="col__content-txt"></p>
-                        <Link
-                          to={`artwork_type/${galleryData[i].artwork_type_id}`}
-                          className="slide-link"
-                        >
-                          <div className="slide-link__circ"></div>
-                          <div className="slide-link__line"></div>
-                        </Link>
-                      </div>
-                    </div>
-                    <a href="#slide-3" className="slide__scroll-link">
-                      <div className="slide__scroll-line"></div>
-                    </a>
-                  </div>
-                  <div className="col w-[50%] col--2">
-                    <div className="col__image-wrap">
-                      <img className="img img--1" src={galleryData[i].url} />
+                </div>
+              </section>
+            ) : (
+              <section
+                className={`slide slide--${i + 1}`}
+                id={`slide--${i + 1}`}
+                key={galleryData[i].artwork_type_id}
+              >
+                <div className="col w-[50%] col--1">
+                  <div className="col__content col__content--2">
+                    <h2 className="col__content-title">
+                      <span className="line__inner">
+                        {galleryData[i].artwork_type_title}s
+                      </span>
+                    </h2>
+                    <div className="col__content-wrap">
+                      <p className="col__content-txt"></p>
+                      <Link
+                        to={`artwork_type/${galleryData[i].artwork_type_id}`}
+                        className="slide-link"
+                      >
+                        <div className="slide-link__circ"></div>
+                        <div className="slide-link__line"></div>
+                      </Link>
                     </div>
                   </div>
-                </section>
-              );
-            }
+                  <a href="#slide-3" className="slide__scroll-link">
+                    <div className="slide__scroll-line"></div>
+                  </a>
+                </div>
+                <div className="col w-[50%] col--2">
+                  <div className="col__image-wrap">
+                    <img className="img img--1" src={galleryData[i].url} />
+                  </div>
+                </div>
+              </section>
+            );
           })}
         </div>
       </div>

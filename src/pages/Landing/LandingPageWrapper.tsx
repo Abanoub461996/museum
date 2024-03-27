@@ -1,13 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../services/api/axiosInstance";
 import LandingPage from "./Landing";
+import Gallery from "../../elements/scrollTrigger/Gallery";
 
 const LandingPageWrapper = () => {
-  const {
-    data: galleryData,
-    isLoading,
-    isFetched,
-  } = useQuery({
+  const { data: galleryData, isFetched } = useQuery({
     queryKey: [`images-van-Gogh`],
     queryFn: async () => {
       return await axiosInstance.get(
@@ -18,7 +15,10 @@ const LandingPageWrapper = () => {
       const uniqueArtworks = res.data.data.reduce((uniqueArtworks, el) => {
         // Check if an artwork with the same title already exists in the uniqueArtworks array
         const existingArtwork = uniqueArtworks.find(
-          (artwork) => artwork.artwork_type_title === el.artwork_type_title || el.artwork_type_title ==="Installation"||el.artwork_type_title ==="Miniature room"
+          (artwork) =>
+            artwork.artwork_type_title === el.artwork_type_title ||
+            el.artwork_type_title === "Installation" ||
+            el.artwork_type_title === "Miniature room"
         );
 
         // If the artwork does not exist in the uniqueArtworks array, add it
@@ -29,12 +29,31 @@ const LandingPageWrapper = () => {
           });
         }
 
-        return uniqueArtworks;
+        return uniqueArtworks
       }, []);
       return uniqueArtworks;
     },
   });
-  return <>{isFetched && <LandingPage galleryData={galleryData.slice(0,8)}/>}</>;
+  return (
+    <>
+      {(isFetched && !!galleryData?.length) && <LandingPage
+      introData={galleryData.filter((el) =>
+        [
+          "Photograph",
+          "Funerary Object"
+        ].includes(el.artwork_type_title)
+      )}
+      galleryData={galleryData.filter((el) =>
+          [
+            "Painting",
+            "Print",
+            "Architectural fragment",
+            "Drawing and Watercolor",
+          ].includes(el.artwork_type_title)
+        )} />}
+      <Gallery />
+    </>
+  );
 };
 
 export default LandingPageWrapper;

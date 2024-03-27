@@ -1,4 +1,4 @@
-import { Outlet, createBrowserRouter, useLocation } from "react-router-dom";
+import { Outlet, createBrowserRouter } from "react-router-dom";
 import MainLayout from "../../Layouts/MainLayout";
 import LandingPageWrapper from "../../pages/Landing/LandingPageWrapper";
 
