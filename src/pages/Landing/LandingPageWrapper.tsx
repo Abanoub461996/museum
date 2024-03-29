@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../services/api/axiosInstance";
-import LandingPage from "./Landing";
-import Gallery from "../../elements/scrollTrigger/Gallery";
+import LandingPage from "./Header/Header";
+import Gallery from "./Gallery/Gallery";
 
 const LandingPageWrapper = () => {
   const { data: galleryData, isFetched } = useQuery({
@@ -34,25 +34,19 @@ const LandingPageWrapper = () => {
       return uniqueArtworks;
     },
   });
+  console.log(galleryData);
+  
   return (
     <>
       {isFetched && !!galleryData?.length && (
         <>
           <LandingPage
             introData={galleryData.filter((el) =>
-              ["Photograph", "Funerary Object"].includes(el.artwork_type_title)
-            )}
-            galleryData={galleryData.filter((el) =>
-              [
-                "Painting",
-                "Print",
-                "Architectural fragment",
-                "Drawing and Watercolor",
-              ].includes(el.artwork_type_title)
+              ["Photograph", "Drawing and Watercolor"].includes(el.artwork_type_title)
             )}
           />
 
-          <Gallery galleryData={galleryData} />
+          <Gallery  />
         </>
       )}
     </>

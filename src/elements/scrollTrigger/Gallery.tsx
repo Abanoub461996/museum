@@ -2,6 +2,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
+import "../../pages/Landing/Header/Header.styles"
 // import { useQuery } from "@tanstack/react-query";
 // import axiosInstance from "../../services/api/axiosInstance";
 
@@ -43,7 +44,7 @@ const Gallery = ({galleryData}) => {
       .timeline({
         scrollTrigger: {
           trigger: ".grid-container",
-          start: "top bottom",
+          start: "top top",
           end: "bottom top",
           scrub: true,
           pin: ".grid",

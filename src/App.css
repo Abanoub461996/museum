@@ -1,5 +1,3 @@
-
-
 .massiveImage {
   height: 100vh;
   width: 400vw;
@@ -54,7 +52,7 @@ body {
 }
 h1 {
   line-height: 120%;
-  margin-bottom: 30px!important;
+  margin-bottom: 30px !important;
 }
 p {
   /* color: #ede0d5; */
@@ -97,7 +95,6 @@ p {
   }
 }
 
-
 /* PARALLAX SECTION */
 a {
   color: #555;
@@ -120,7 +117,7 @@ a {
 
 .pContent {
   width: 65%;
-  background-color: rgba(78,152,21,0.8);
+  background-color: rgba(78, 152, 21, 0.8);
   color: white;
   padding: 40px 60px;
 }
@@ -132,7 +129,6 @@ a {
   right: 0;
   max-height: 900px;
 }
-
 
 :root {
   --dark: #242423;
@@ -153,26 +149,24 @@ body {
   min-height: 100vh;
 }
 body {
-    background-color: white;
-    font-family: "Noto Sans", sans-serif;
-    font-size: 14px;
-    color: var(--dark);
-    line-height: 1.3;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+  background-color: white;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 14px;
+  color: var(--dark);
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  .logo,
-  h1,
-  h2 {
-    margin: 0;
-    line-height: 1;
-    font-family: "Cinzel", serif;
-    font-weight: 400;
-  }
+.logo,
+h1,
+h2 {
+  margin: 0;
+  line-height: 1;
+  font-family: "Cinzel", serif;
+  font-weight: 400;
+}
 
-  p {
-    margin: 0;
-  }
-
-  
+p {
+  margin: 0;
+}
