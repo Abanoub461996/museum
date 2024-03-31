@@ -12,10 +12,12 @@ height: 100vh;
     ========================================================================== */
   .header {
     position: fixed;
-    left: 40px;
-    top: 24px;
     z-index: 100;
     display: flex;
+    width: 100%;
+    margin: auto;
+    justify-content: space-between;
+    padding: 1em 5%;
   }
   @media all and (max-width: 768px) {
     .header {

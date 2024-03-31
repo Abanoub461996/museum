@@ -60,9 +60,9 @@ export const GalleryWrapper = styled.div`
     z-index: -1;
   }
   .gridLayer:nth-child(3) .gridBlock {
-    top: 10vh;
+    top: 5vh;
     left: 70vw;
-    width: 18%;
+    width: 28%;
   }
 
   .gridLayer:nth-child(4) {

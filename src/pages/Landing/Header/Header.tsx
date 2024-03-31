@@ -68,7 +68,6 @@ const LandingPage = ({ introData }) => {
         start: "top top", // position of trigger meets the scroller position
         end: "bottom top",
         toggleActions:"play reverse",
-        markers: true,
       },
     });
 
@@ -102,6 +101,12 @@ const LandingPage = ({ introData }) => {
         <div className="stage" id="smooth-content" ref={stage}>
           <header className="header">
             <div className="logo font-lobster">MuseuM</div>
+            <div className="flex justify-end gap-2 items-center">
+            <div className=" font-truculenta">Paintings</div>
+            <div className=" font-truculenta">Sculptures</div>
+            <div className=" font-truculenta">Religious</div>
+            </div>
+
           </header>
 
           <section className="intro slide--0" id="slide-0">
