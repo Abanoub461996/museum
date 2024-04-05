@@ -7,20 +7,9 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 // Styles
 import { HeaderWrapper } from "./Header.styles";
 
-const LandingPage = ({ introData }) => {
+const LandingPage = () => {
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(ScrollToPlugin);
-
-  function initHeader() {
-    const tl = gsap.timeline({ delay: 0.5 });
-
-    tl.from(".logo", {
-      y: -40,
-      opacity: 0,
-      duration: 2,
-      ease: "power4",
-    });
-  }
 
   function initIntro() {
     // animate the intro elements into place
@@ -92,29 +81,18 @@ const LandingPage = ({ introData }) => {
 
   const stage = useRef<HTMLDivElement>(null);
   useGSAP(() => {
-    initHeader();
     initIntro();
   });
   return (
     <HeaderWrapper>
       <div id="smooth-wrapper">
         <div className="stage" id="smooth-content" ref={stage}>
-          <header className="header">
-            <div className="logo font-lobster">MuseuM</div>
-            <div className="flex justify-end gap-2 items-center">
-            <div className=" font-truculenta">Paintings</div>
-            <div className=" font-truculenta">Sculptures</div>
-            <div className=" font-truculenta">Religious</div>
-            </div>
-
-          </header>
-
           <section className="intro slide--0" id="slide-0">
             <div className="intro__content">
               <h1 className="intro__title font-lobster">MuseuM</h1>
             </div>
-            <img className="intro__img intro__img--1" src={introData[1]?.url} />
-            <img className="intro__img intro__img--2" src={introData[0]?.url} />
+            <img className="intro__img intro__img--1" src="https://www.artic.edu/iiif/2/cb34b0a8-bc51-d063-aab1-47c7debf3a7b/full/843,/0/default.jpg" />
+            <img className="intro__img intro__img--2" src="https://www.artic.edu/iiif/2/d812e25d-5d00-cb04-f973-c5eaf671d540/full/843,/0/default.jpg" />
           </section>
         </div>
       </div>

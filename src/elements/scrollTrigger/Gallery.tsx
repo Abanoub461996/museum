@@ -2,13 +2,12 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
-import "../../pages/Landing/Header/Header.styles"
+import "../../pages/Landing/Header/Header.styles";
 // import { useQuery } from "@tanstack/react-query";
 // import axiosInstance from "../../services/api/axiosInstance";
 
-const Gallery = ({galleryData}) => {
+const Gallery = ({ galleryData }) => {
   gsap.registerPlugin(ScrollTrigger);
-
 
   // const {
   //   data: galleryData,
@@ -24,11 +23,10 @@ const Gallery = ({galleryData}) => {
   //   },
   // });
   useEffect(() => {
-   {
+    {
       // const  size = Math.max(innerWidth, innerHeight);
       gsap.set(".gridBlock", {
-        backgroundImage: (i) =>
-          `url(${galleryData[i].url})`,
+        backgroundImage: (i) => `url(${galleryData[i].url})`,
       });
 
       const bigImg = new Image();
@@ -45,11 +43,11 @@ const Gallery = ({galleryData}) => {
         scrollTrigger: {
           trigger: ".grid-container",
           start: "top top",
-          end: "bottom top",
+          end: "bottom bottom",
           scrub: true,
-          pin: ".grid",
-          anticipatePin: 1,
-            markers: true,
+          // pin: ".grid",
+          // anticipatePin: 1,
+          markers: true,
         },
       })
       .set(".gridBlock:not(.centerBlock)", { autoAlpha: 0 })

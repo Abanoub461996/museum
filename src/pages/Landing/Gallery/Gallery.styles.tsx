@@ -11,7 +11,7 @@ export const GalleryWrapper = styled.div`
   /* Grid almost fully pulled from https://www.rino-pelle.com/ */
   .grid-container {
     width: 100vw;
-    height: 400vh;
+    height: 180vh;
     position: relative;
     overflow: hidden;
   }
@@ -40,20 +40,20 @@ export const GalleryWrapper = styled.div`
   }
 
   .gridLayer:nth-child(1) .gridBlock {
-    top: 25vh;
-    width: 50vw;
+    top: 35vh;
+    width: 25vw;
     left: 50%;
     transform: translate(-50%, 0);
-    height: 50vh;
+    /* height: 50vh; */
   }
 
   .gridLayer:nth-child(2) {
     z-index: 1;
   }
   .gridLayer:nth-child(2) .gridBlock {
-    top: 15vh;
+    top: 25vh;
     left: 5vw;
-    width: 15%;
+    width: 20%;
   }
 
   .gridLayer:nth-child(3) {
@@ -61,22 +61,32 @@ export const GalleryWrapper = styled.div`
   }
   .gridLayer:nth-child(3) .gridBlock {
     top: 5vh;
-    left: 70vw;
-    width: 28%;
+    left: 30vw;
+    width: 10%;
   }
 
   .gridLayer:nth-child(4) {
     z-index: -1;
   }
   .gridLayer:nth-child(4) .gridBlock {
-    bottom: 0vh;
-    left: 7vw;
-    width: 20%;
+    bottom: 10vh;
+    left: 20vw;
+    width: 12%;
   }
   .gridLayer:nth-child(5) .gridBlock {
-    bottom: 3vh;
-    left: 80vw;
-    width: 12%;
+    bottom: 5vh;
+    left: 68vw;
+    width: 11%;
+  }
+  .gridLayer:nth-child(6) .gridBlock {
+    top: 32vh;
+    left: 73vw;
+    width: 20%;
+  }
+  .gridLayer:nth-child(7) .gridBlock {
+    top: 8vh;
+    left: 59vw;
+    width: 17%;
   }
 
   .gridBlock {

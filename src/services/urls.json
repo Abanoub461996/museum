@@ -1,0 +1,6 @@
+{
+    "urls":[
+        {"type":"painting", "name":"coton cabin","url":"https://www.artic.edu/iiif/2/d812e25d-5d00-cb04-f973-c5eaf671d540/full/843,/0/default.jpg"}
+    ]
+    // https://api.artic.edu/api/v1/artworks?query[term][artwork_type_title]=Painting&limit=1&fields=id,title,image_id,artwork_type_title
+}
