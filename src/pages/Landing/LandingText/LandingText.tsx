@@ -31,22 +31,22 @@ const LandingText = () => {
         ">"
       );
 
-    gsap.utils.toArray(".artwork_type").forEach((layer: any) => {
-      const randomY = gsap.utils.random(0, 10); // generates a random number between -10 and 10
+    // gsap.utils.toArray(".artwork_type").forEach((layer: any) => {
+    //   const randomY = gsap.utils.random(0, 10); // generates a random number between -10 and 10
 
-      gsap
-        .fromTo(
-          layer,
-          {  scale:1 },
-          {
-            scale:1.3,
-            yoyo: true,
-            repeat: -1,
-            duration: 5,
-            ease: "power3",
-          }
-        )
-    });
+    //   gsap
+    //     .fromTo(
+    //       layer,
+    //       {  scale:1 },
+    //       {
+    //         scale:1.3,
+    //         yoyo: true,
+    //         repeat: -1,
+    //         duration: 5,
+    //         ease: "power3",
+    //       }
+    //     )
+    // });
   });
 
   return (
@@ -63,7 +63,7 @@ const LandingText = () => {
           you journey through captivating exhibits,
           <br /> showcasing masterpieces from renowned artists across the ages.
           <br /> Experience the beauty and depth of human creativity firsthand.
-          <div className="artwork_type artwork_type__1 font-lobster">
+          {/* <div className="artwork_type artwork_type__1 font-lobster">
             Paintings.
           </div>
           <div className="artwork_type artwork_type__2 font-lobster">
@@ -80,7 +80,7 @@ const LandingText = () => {
           </div>
           <div className="artwork_type artwork_type__6 font-lobster">
             Costume and Accessories.
-          </div>
+          </div> */}
         </div>
       </div>
     </TextWrapper>

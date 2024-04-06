@@ -47,7 +47,7 @@ const Gallery = ({ galleryData }) => {
           scrub: true,
           // pin: ".grid",
           // anticipatePin: 1,
-          markers: true,
+          // markers: true,
         },
       })
       .set(".gridBlock:not(.centerBlock)", { autoAlpha: 0 })
