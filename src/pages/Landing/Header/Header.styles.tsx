@@ -41,7 +41,7 @@ export const HeaderWrapper = styled.div`
   .intro {
     position: relative;
     padding: 5vw;
-    background: #c0d7d8;
+    background: var(--main-bg);
     overflow: hidden;
   }
 
@@ -293,7 +293,7 @@ export const HeaderWrapper = styled.div`
 
   .slide--0,
   .slide--0 .slide__scroll-line {
-    background: #c0d7d8;
+    background: var(--main-bg);
   }
 
   .slide--1,
