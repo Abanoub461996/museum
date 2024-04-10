@@ -2,7 +2,7 @@ import { Outlet, createBrowserRouter } from "react-router-dom";
 import MainLayout from "../../Layouts/MainLayout";
 import LandingPageWrapper from "../../pages/Landing/LandingPageWrapper";
 import ArtowrkTypes from "../../pages/ArwortkTypes/Index/ArtowrkTypes";
-import ArtWorkDetails from "../../pages/ArwortkTypes/Index/ArtWorkDetails/ArtWorkDetails";
+import ArtWorkDetails from "../../pages/ArwortkTypes/ArtWorkDetails/ArtWorkDetails";
 
 const router = createBrowserRouter([
   {
