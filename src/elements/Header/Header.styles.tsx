@@ -10,7 +10,7 @@ export const HeaderWrapper = styled.div`
     Nav Header
     ========================================================================== */
   .header {
-    position: fixed;
+    /* position: fixed; */
     z-index: 100;
     display: flex;
     width: 100%;

@@ -20,6 +20,9 @@ export const LoaderWrapper = styled.div`
   }
   .loader__msg {
     font-size: 2em;
+    @media (max-width: 900px) {
+      font-size: 1.2em;
+    }
   }
   #quote {
     -webkit-transform: translate3d(0, 0, 0);

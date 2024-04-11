@@ -29,7 +29,7 @@ const HeaderNavbar = () => {
   });
   const activePath = () => {};
   const goTo = (field) => {
-    navigate(`/museum/${field}`);
+    navigate(`/${field}`);
   };
   return (
     <HeaderWrapper>

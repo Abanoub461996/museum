@@ -4,10 +4,7 @@ import axiosInstance, { noLoaderInstance } from "../../../services/api/axiosInst
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import ArtPieceCard from "./ArtPieceCard/ArtPieceCard";
-import { Paginator, PaginatorPageChangeEvent } from "primereact/paginator";
-import { useSearchParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Loader, { LoaderType } from "../../../elements/Loader/Loader";
 import LoadMore from "../../../elements/Loader/ShowMore";
 interface ArtworkDetail {
   id: string;
@@ -16,6 +13,7 @@ interface ArtworkDetail {
   artwork_type_title: string;
   thumbnail: string;
   timestamp: string;
+  color:any;
 }
 const ArtWorkDetails = () => {
   const { id } = useParams();
@@ -26,7 +24,6 @@ const ArtWorkDetails = () => {
 
   const [hasMore, setHasMore] = useState(true);
   const [index, setIndex] = useState(2);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const {
     data: artWorkTypeEx,
@@ -37,7 +34,7 @@ const ArtWorkDetails = () => {
     queryFn: async () => {
       return await axiosInstance
         .get(
-          `/artworks/search?query[term][artwork_type_id]=${id}&limit=12&fields=id,title,image_id,artwork_type_title,thumbnail,artist_title,date_display`
+          `/artworks/search?query[term][artwork_type_id]=${id}&limit=12&fields=id,title,image_id,artwork_type_title,thumbnail,artist_title,date_display,color,place_of_origin`
         )
         .then((res) => {
           return res;
@@ -60,7 +57,7 @@ const ArtWorkDetails = () => {
   const fetchMoreData = () => {
     noLoaderInstance
       .get(
-        `/artworks/search?query[term][artwork_type_id]=${id}&limit=12&page=${index}&fields=id,title,image_id,artwork_type_title,thumbnail,artist_title,date_display`
+        `/artworks/search?query[term][artwork_type_id]=${id}&limit=12&page=${index}&fields=id,title,image_id,artwork_type_title,thumbnail,artist_title,date_display,color,place_of_origin`
       )
       .then((res) => {
         setItems((prevItems) => [...prevItems, ...res.data.data]);

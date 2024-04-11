@@ -2,6 +2,12 @@ import styled from "styled-components";
 
 export const ArtWorkPageWrapper = styled.div`
   padding: 5% 0;
+  .page__content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .page__header {
     font-family: lobster;
     font-size: 28px;
