@@ -47,5 +47,7 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(err);
   }
 );
-
+export const noLoaderInstance = axios.create({
+  baseURL: import.meta.env.VITE_DATABASE_URL,
+});
 export default axiosInstance;

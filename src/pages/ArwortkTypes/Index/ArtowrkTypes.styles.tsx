@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ArtowrkTypesWrapper = styled.div`
-  padding: 5% 0;
+  padding: 5%;
   .page__header {
     font-family: lobster;
     font-size: 28px;

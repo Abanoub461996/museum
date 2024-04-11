@@ -3,9 +3,6 @@ import styled from "styled-components";
 export const ArtPieceCardWrapper = styled.div`
   width: 100%;
   margin-bottom: 2em;
-  border-radius: 12px;
-  overflow: hidden;
-
   .art__piece_details {
     width: 80%;
     margin: auto;
@@ -20,9 +17,9 @@ export const ArtPieceCardWrapper = styled.div`
       font-size: 1.5em;
     }
   }
-  &:hover{
-    box-shadow: 6px 6px 10px 0 #0000001a;
-    transform: scale(1.1);
+  &:hover .art__piece_img{
+    box-shadow: 6px 6px 10px 20px #0000001a;
+    transform: scaleX(1.05);
     background-color: var(--main-bg);
   }
 `;

@@ -16,7 +16,7 @@ const ArtWorkCard = ({ type }: { type: ArtWorkTypeInterface }) => {
     queryKey: [`artwork-type-card-${type.id}`],
     queryFn: async () => {
       return await axiosInstance.get(
-        `/artworks/search?query[term][artwork_type_id]=${type.id}&limit=12&fields=id,title,image_id,artwork_type_title,thumbnail,timestamp`
+        `/artworks/search?query[term][artwork_type_id]=${type.id}&limit=13&fields=id,title,image_id,artwork_type_title,date_display,thumbnail,artist_title`
       );
     },
     select: (res) => {

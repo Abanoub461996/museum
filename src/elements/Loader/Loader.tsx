@@ -29,7 +29,7 @@ const Loader = ({ type }) => {
   });
   return (
     <LoaderWrapper>
-      <div className="loader__header font-lobster flex justify-center">
+      <div className="loader__header font-paintings flex justify-center">
         <div>LOADING</div>
         <div className="replacable"></div>
       </div>

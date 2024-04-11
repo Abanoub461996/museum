@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ArtWorkPageWrapper = styled.div`
-  padding: 5%;
+  padding: 5% 0;
   .page__header {
     font-family: lobster;
     font-size: 28px;
@@ -20,7 +20,7 @@ export const ArtWorkPageWrapper = styled.div`
       transition: width 0.3s ease;
     }
   }
-  .scroll_reveal_container {
+  .artwork__container {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
