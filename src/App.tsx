@@ -10,6 +10,7 @@ import MainLayout from "./Layouts/MainLayout";
 import LandingPageWrapper from "./pages/Landing/LandingPageWrapper";
 import ArtowrkTypes from "./pages/ArwortkTypes/Index/ArtowrkTypes";
 import ArtWorkDetails from "./pages/ArwortkTypes/ArtWorkDetails/ArtWorkDetails";
+import ArtistsList from "./pages/Artists/ArtistsList";
 function App() {
   return (
     <>
@@ -30,7 +31,7 @@ function App() {
               <Route path=":id" element={<ArtWorkDetails />} />
             </Route>
             <Route path="artists" element={<Outlet />}>
-              <Route index={true} element={<ArtowrkTypes />} />
+              <Route index={true} element={<ArtistsList />} />
               <Route path=":id" element={<ArtWorkDetails />} />
             </Route>
           </Route>

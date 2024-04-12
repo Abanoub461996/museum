@@ -29,9 +29,9 @@ const Footer = () => {
   const artists = useMemo(() => {
     return [
       { id: 40610, title: "Vincent van Gogh", category: "artists" },
-      { id: 34316, title: "Marcel Duchamp", category: "artists" },
-      { id: 35670, title: "Henri Matisse", category: "artists" },
+      { id: 34123, title: "Salvador Dalí", category: "artists" },
       { id: 36198, title: "Pablo Picasso", category: "artists" },
+      { id: 35670, title: "Henri Matisse", category: "artists" },
     ];
   }, []);
   const categories = useMemo(() => {
@@ -61,7 +61,7 @@ const Footer = () => {
   }, []);
 
   const goTo = (field) => {
-    navigate(`/museum/${field.category}/${field.id}`);
+    navigate(`${field.category}/${field.id}`);
   };
   return (
     <FooterWrapper>
