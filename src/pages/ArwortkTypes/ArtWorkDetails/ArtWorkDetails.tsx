@@ -3,7 +3,7 @@ import { ArtWorkPageWrapper } from "./ArtWorkDetails.styles";
 import axiosInstance, { noLoaderInstance } from "../../../services/api/axiosInstance";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import ArtPieceCard from "./ArtPieceCard/ArtPieceCard";
+import ArtPieceCard from "../../../elements/ArtPieceCard/ArtPieceCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 import LoadMore from "../../../elements/Loader/ShowMore";
 interface ArtworkDetail {
@@ -35,10 +35,7 @@ const ArtWorkDetails = () => {
       return await axiosInstance
         .get(
           `/artworks/search?query[term][artwork_type_id]=${id}&limit=12&fields=id,title,image_id,artwork_type_title,thumbnail,artist_title,date_display,color,place_of_origin`
-        )
-        .then((res) => {
-          return res;
-        });
+        );
     },
     select: (res) => {
       return res.data;

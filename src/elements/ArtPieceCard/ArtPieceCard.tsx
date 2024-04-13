@@ -1,14 +1,18 @@
-import moment from "moment";
-import imageUrl from "../../../../services/imageUrl";
-import { ArtPieceCardWrapper } from "./ArtPieceCard.styles";
+import { useNavigate } from "react-router";
 import { useState } from "react";
 import { BsFillCalendar2DateFill } from "react-icons/bs";
 import { FaLocationDot } from "react-icons/fa6";
+import { ArtPieceWrapper } from "./ArtPieceCard.styles";
+import imageUrl from "../../services/imageUrl";
 
 const ArtPieceCard = ({ pieceOfArt }) => {
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const goTo = (id: string) => {
+    navigate(`${id}`);
+  };
   return (
-    <ArtPieceCardWrapper
+    <ArtPieceWrapper
       $thumbnail={pieceOfArt.thumbnail}
       $color={pieceOfArt.color}
     >
@@ -33,13 +37,14 @@ const ArtPieceCard = ({ pieceOfArt }) => {
           <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
         </svg>
       </div>
-      <div className="art__piece_title font-lobster">{pieceOfArt.title}</div>
-      <div className="art__piece_details">
-        <div className="artpiece__flex">
-          <div className="flex justify-center items-center gap-2">
+      <div className="art__piece_overlay">
+        <div className="art__piece_details">
+          <div className="art__piece_title font-lobster">
+            {pieceOfArt.title}
+          </div>
+          {pieceOfArt.artist_title && <div className="flex justify-center mb-1 items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              
               version="1.1"
               id="Capa_1"
               viewBox="0 0 612 612"
@@ -52,20 +57,22 @@ const ArtPieceCard = ({ pieceOfArt }) => {
               </g>
             </svg>
             <div>{pieceOfArt.artist_title}</div>
-          </div>
-          <div className="flex justify-center items-center gap-2">
-            <BsFillCalendar2DateFill />
-            <div>{pieceOfArt.date_display}</div>
-          </div>
-        </div>
-        <div className="artpiece__flex">
-          <div className="flex justify-center items-center gap-2">
-            <FaLocationDot />
-            <div>{pieceOfArt.place_of_origin}</div>
-          </div>
+          </div>}
+          {pieceOfArt.date_display && (
+            <div className="flex justify-center mb-1 items-center gap-2">
+              <BsFillCalendar2DateFill />
+              <div>{pieceOfArt.date_display}</div>
+            </div>
+          )}
+          {pieceOfArt.place_of_origin && (
+            <div className="flex justify-center mb-1 items-center gap-2">
+              <FaLocationDot />
+              <div>{pieceOfArt.place_of_origin}</div>
+            </div>
+          )}
         </div>
       </div>
-    </ArtPieceCardWrapper>
+    </ArtPieceWrapper>
   );
 };
 export default ArtPieceCard;

@@ -3,7 +3,7 @@ import { SearchBarWrapper } from "./SearchBar.styles";
 import { TbWorldSearch } from "react-icons/tb";
 import { useState } from "react";
 
-const SearchBar = ({ submitSearch }) => {
+const SearchBar = ({ submitSearch  }) => {
   const [value, setValue] = useState<string>("");
 
   return (
@@ -17,10 +17,11 @@ const SearchBar = ({ submitSearch }) => {
             setValue(e.target.value)
           }
         ></InputText>
-        <button className="search__btn" onClick={()=>submitSearch(value)}>
+        <button className="search__btn" onClick={() => submitSearch(value)}>
           <TbWorldSearch />
         </button>
       </div>
+      
     </SearchBarWrapper>
   );
 };

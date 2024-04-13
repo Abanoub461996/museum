@@ -3,13 +3,18 @@ import { ArtistsListWrapper } from "./ArtistsList.styles";
 import ArtistCard from "./ArtistCard/ArtistCard";
 import { useScramble } from "use-scramble";
 import SearchBar from "../../elements/SearchBar/SearchBar";
+import { useMutation } from "@tanstack/react-query";
+import { noLoaderInstance } from "../../services/api/axiosInstance";
+import { useNavigate } from "react-router";
+import { TiArrowRightOutline } from "react-icons/ti";
 
 const ArtistsList = () => {
+  const navigate = useNavigate();
   const { ref, replay } = useScramble({
-    text: "Discover The Most Popular Artists",
+    text: "Discover The Most Popular Artists' Work",
   });
   const { ref: searchRef, replay: replaySearchText } = useScramble({
-    text: "Or Search For Your Own Favourite Artists",
+    text: "Or Find Your Own Favourite Artists Among Over 13,000 Artists",
   });
   const artists = useMemo(() => {
     return [
@@ -46,10 +51,25 @@ const ArtistsList = () => {
       },
     ];
   }, []);
-  const submitSearch =(data)=>{
-    console.log(data);
-    
-  }
+  const [searchList, setSearchList] = useState<any[]>([]);
+  const { mutate, data: searchRes } = useMutation({
+    mutationFn: (searchTerm: string) => {
+      return noLoaderInstance.get(
+        `/artists/search?q=${searchTerm}&fields=birth_date,death_date,title,id`
+      );
+    },
+    onSuccess: (res) => {
+      setSearchList(res.data.data);
+      return res.data.data;
+    },
+    // You can also specify other properties here if needed, such as onSuccess, onError, etc.
+  });
+  const submitSearch = async (searchTerm: string) => {
+    await mutate(searchTerm);
+  };
+  const goTo = (id: number) => {
+    navigate(`${id}`);
+  };
   return (
     <ArtistsListWrapper>
       <div className="scrubmle_texts" ref={ref} onMouseOver={replay}></div>
@@ -68,7 +88,34 @@ const ArtistsList = () => {
         onMouseOver={replaySearchText}
       ></div>
       <div className="search__element w-full flex">
-        <SearchBar submitSearch={submitSearch}/>
+        <SearchBar submitSearch={submitSearch} />
+      </div>
+      <div className="search__results_list">
+        {!!searchList.length && (
+          <div className="results__list_wrapper">
+            {searchList.map((result) => {
+              return (
+                <div
+                  className="result__list_item"
+                  key={result.id}
+                  onClick={() => goTo(result.id)}
+                >
+                  <div>
+                    <div className="result__title">{result.title}</div>
+                    {result?.birth_date && (
+                      <div className="result__era">
+                        ({result.birth_date} - {result.death_date})
+                      </div>
+                    )}
+                  </div>
+                  <div className="card__arrow">
+                    <TiArrowRightOutline size={24} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </ArtistsListWrapper>
   );
