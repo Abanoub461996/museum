@@ -31,6 +31,7 @@ export const ArtWorkPageWrapper = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
+    width: 100%;
     .scroll_reveal_col {
       width: calc(33.3334%);
     }

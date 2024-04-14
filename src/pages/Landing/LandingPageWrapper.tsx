@@ -5,15 +5,14 @@ import Gallery from "./Gallery/Gallery";
 import LandingText from "./LandingText/LandingText";
 
 const LandingPageWrapper = () => {
-
   return (
     <>
-        <>
-          <LandingPage
+      <div className="flex justify-center items-center h-[50vh] w-full text-[40px] font-lobster">Coming Soon
+        {/* <LandingPage
           />
           <LandingText />
-          <Gallery />
-        </>
+          <Gallery /> */}
+      </div>
     </>
   );
 };

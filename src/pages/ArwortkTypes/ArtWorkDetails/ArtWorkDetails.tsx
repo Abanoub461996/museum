@@ -22,7 +22,7 @@ const ArtWorkDetails = () => {
   const [itemsCol2, setItemsCol2] = useState<ArtworkDetail[]>([]);
   const [itemsCol3, setItemsCol3] = useState<ArtworkDetail[]>([]);
 
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
   const [index, setIndex] = useState(2);
 
   const {
@@ -45,6 +45,7 @@ const ArtWorkDetails = () => {
   });
   useEffect(() => {
     if (status === "success") {
+      setHasMore(artWorkTypeEx.total_pages >2)
       setItems([...artWorkTypeEx.data]);
       setItemsCol1(artWorkTypeEx.data.slice(0, 4));
       setItemsCol2(artWorkTypeEx.data.slice(4, 8));
