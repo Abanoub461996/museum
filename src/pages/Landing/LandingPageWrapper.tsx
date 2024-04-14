@@ -7,7 +7,7 @@ import LandingText from "./LandingText/LandingText";
 const LandingPageWrapper = () => {
   return (
     <>
-      <div className="flex justify-center items-center h-[50vh] w-full text-[40px] font-lobster">Coming Soon
+      <div className="flex justify-center items-center h-[50vh] w-full text-[40px] font-lobster">Under Constrution
         {/* <LandingPage
           />
           <LandingText />
