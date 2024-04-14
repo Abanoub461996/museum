@@ -6,10 +6,10 @@ import "primereact/resources/primereact.min.css";
 import { HashRouter } from "react-router-dom";
 import MainLayout from "./Layouts/MainLayout";
 import LandingPageWrapper from "./pages/Landing/LandingPageWrapper";
-import ArtWorkDetails from "./pages/ArwortkTypes/ArtWorkDetails/ArtWorkDetails";
 import ArtistsList from "./pages/Artists/ArtistsList";
 import ArtistWork from "./pages/Artists/ArtistWork/ArtistWork";
 import TypesList from "./pages/Types/TypesList";
+import ArtWorkDetails from "./pages/Types/ArtWorkDetails/ArtWorkDetails";
 function App() {
   return (
     <>

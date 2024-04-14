@@ -18,8 +18,8 @@ const HeaderNavbar = () => {
   function initHeader() {
     const tl = gsap.timeline({ delay: 0.5 });
     tl.from(".logo", {
-      y: -40,
-      opacity: 0,
+      // y: -40,
+      // opacity: 0,
       duration: 2,
       ease: "power4",
     });
@@ -27,7 +27,6 @@ const HeaderNavbar = () => {
   useGSAP(() => {
     initHeader();
   });
-  const activePath = () => {};
   const goTo = (field) => {
     navigate(`/${field}`);
   };
@@ -55,14 +54,14 @@ const HeaderNavbar = () => {
             >
               Artists
             </div>
-            <div
+            {/* <div
               className={`nav_item ${
                 location.includes("categories") ? "active" : ""
               }`}
               onClick={() => goTo("categories")}
             >
               Categories
-            </div>
+            </div> */}
           </div>
         </header>
       </div>

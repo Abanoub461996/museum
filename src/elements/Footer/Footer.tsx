@@ -39,23 +39,28 @@ const Footer = () => {
       { id: "PC-8", title: "Contemporary Art", category: "categories" },
       {
         title: "Modern Art",
-        id: "PC-11", category: "categories"
+        id: "PC-11",
+        category: "categories",
       },
       {
         title: "Arts of the Americas",
-        id: "PC-3", category: "categories"
+        id: "PC-3",
+        category: "categories",
       },
       {
         title: "Arts of the Ancient Mediterranean and Byzantium",
-        id: "PC-4", category: "categories"
+        id: "PC-4",
+        category: "categories",
       },
       {
         title: "Painting and Sculpture of Europe",
-        id: "PC-10", category: "categories"
+        id: "PC-10",
+        category: "categories",
       },
       {
         title: "Arts of Asia",
-        id: "PC-7", category: "categories"
+        id: "PC-7",
+        category: "categories",
       },
     ];
   }, []);
@@ -72,10 +77,7 @@ const Footer = () => {
             <div className="site__map__category">ArtWork Types</div>
             {artworkTypes.map((artworktype) => {
               return (
-                <div
-                  key={artworktype.id}
-                  onClick={() => goTo(artworktype)}
-                >
+                <div key={artworktype.id} onClick={() => goTo(artworktype)}>
                   {artworktype.title}
                 </div>
               );
@@ -91,18 +93,18 @@ const Footer = () => {
               );
             })}
           </div>
-          <div className="site__map__list categorys">
+          {/* <div className="site__map__list categorys">
             <div className="site__map__category">categorys</div>
 
             {categories.map((category) => {
               return <div key={category.id} onClick={() => goTo(category)}>{category.title}</div>;
             })}
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="footer__tail">
-        The data in this website is licensed under a Creative Commons Zero
-        (CC0) 1.0 designation and the Terms and Conditions of artic.edu.
+        The data in this website is licensed under a Creative Commons Zero (CC0)
+        1.0 designation and the Terms and Conditions of artic.edu.
       </div>
     </FooterWrapper>
   );
