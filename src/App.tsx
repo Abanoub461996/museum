@@ -10,6 +10,7 @@ import ArtistsList from "./pages/Artists/ArtistsList";
 import ArtistWork from "./pages/Artists/ArtistWork/ArtistWork";
 import TypesList from "./pages/Types/TypesList";
 import ArtWorkDetails from "./pages/Types/ArtWorkDetails/ArtWorkDetails";
+import ArtPieceDetails from "./pages/ArtPieceDetails/ArtPieceDetails";
 function App() {
   return (
     <>
@@ -31,6 +32,10 @@ function App() {
             <Route path="artists" element={<Outlet />}>
               <Route index={true} element={<ArtistsList />} />
               <Route path=":id" element={<ArtistWork />} />
+            </Route>
+            <Route path="artwork_piece" element={<Outlet />}>
+              {/* <Route index={true} element={<ArtistsList />} /> */}
+              <Route path=":id" element={<ArtPieceDetails />} />
             </Route>
             <Route path="categories" element={<Outlet />}>
               <Route index={true} element={<TypesList />} />

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { toastifyError } from "../toaster/toastify";
 import { closeLoader, showLoader } from "../store/slices/loaderSlice";
 
@@ -36,7 +36,7 @@ axiosInstance.interceptors.response.use(
       return res;
     }
   },
-  async (err: any) => {
+  async (err: AxiosError<any>) => {
     requests--;
     if (err.response) {
       toastifyError(err.response.data.message);
