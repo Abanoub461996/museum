@@ -19,7 +19,6 @@ interface ArtworkDetail {
   artwork_type_title: string;
   thumbnail: string;
   timestamp: string;
-  color: any;
   description: string;
 }
 const ArtistWork = () => {
@@ -33,9 +32,7 @@ const ArtistWork = () => {
 
   const {
     data: artistDetails,
-    isLoading,
     status,
-    isFetched,
   } = useQuery({
     queryKey: [`artwork-type-card-${id}`],
     queryFn: async () => {

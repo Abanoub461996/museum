@@ -41,9 +41,6 @@ axiosInstance.interceptors.response.use(
     if (err.response) {
       toastifyError(err.response.data.message);
     }
-    if (!requests) {
-      console.log("hereee");
-    }
     return Promise.reject(err);
   }
 );

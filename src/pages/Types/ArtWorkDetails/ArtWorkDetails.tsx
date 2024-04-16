@@ -1,8 +1,10 @@
 import { useParams } from "react-router";
 import { ArtWorkPageWrapper } from "./ArtWorkDetails.styles";
-import axiosInstance, { noLoaderInstance } from "../../../services/api/axiosInstance";
+import axiosInstance, {
+  noLoaderInstance,
+} from "../../../services/api/axiosInstance";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ArtPieceCard from "../../../elements/ArtPieceCard/ArtPieceCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 import LoadMore from "../../../elements/Loader/ShowMore";
@@ -13,16 +15,14 @@ interface ArtworkDetail {
   artwork_type_title: string;
   thumbnail: string;
   timestamp: string;
-  color:any;
 }
 const ArtWorkDetails = () => {
   const { id } = useParams();
-  const [items, setItems] = useState<ArtworkDetail[]>([]);
   const [itemsCol1, setItemsCol1] = useState<ArtworkDetail[]>([]);
   const [itemsCol2, setItemsCol2] = useState<ArtworkDetail[]>([]);
   const [itemsCol3, setItemsCol3] = useState<ArtworkDetail[]>([]);
 
-  const [hasMore, setHasMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
   const [index, setIndex] = useState(2);
 
   const {
@@ -32,24 +32,37 @@ const ArtWorkDetails = () => {
   } = useQuery({
     queryKey: [`artwork-type-card-${id}`],
     queryFn: async () => {
-      return await axiosInstance
-        .get(
-          `/artworks/search?query[term][artwork_type_id]=${id}&limit=12&fields=id,title,image_id,artwork_type_title,thumbnail,artist_title,date_display,color,place_of_origin`
-        );
+      return await axiosInstance.get(
+        `/artworks/search?query[term][artwork_type_id]=${id}&limit=12&fields=id,title,image_id,artwork_type_title,thumbnail,artist_title,date_display,color,place_of_origin`
+      );
     },
     select: (res) => {
       return res.data;
     },
     staleTime: Infinity,
-    enabled: !items.length,
   });
+  const splitData = (items) => {
+    items = items.filter((item) => item.image_id);
+    items.map((item, i) => {
+      switch (i % 3) {
+        case 0:
+          setItemsCol3((prev) => [...prev, item]);
+          break;
+        case 1:
+          setItemsCol2((prev) => [...prev, item]);
+          break;
+        case 2:
+          setItemsCol1((prev) => [...prev, item]);
+          break;
+      }
+    });
+  };
+  const splitDataCalled = useRef(false);
+
   useEffect(() => {
-    if (status === "success") {
-      setHasMore(artWorkTypeEx.total_pages >2)
-      setItems([...artWorkTypeEx.data]);
-      setItemsCol1(artWorkTypeEx.data.slice(0, 4));
-      setItemsCol2(artWorkTypeEx.data.slice(4, 8));
-      setItemsCol3(artWorkTypeEx.data.slice(8, 12));
+    if (status === "success" && !splitDataCalled.current) {
+      splitData(artWorkTypeEx.data);
+      splitDataCalled.current = true;
     }
   }, [status, artWorkTypeEx]);
   const fetchMoreData = () => {
@@ -58,19 +71,7 @@ const ArtWorkDetails = () => {
         `/artworks/search?query[term][artwork_type_id]=${id}&limit=12&page=${index}&fields=id,title,image_id,artwork_type_title,thumbnail,artist_title,date_display,color,place_of_origin`
       )
       .then((res) => {
-        setItems((prevItems) => [...prevItems, ...res.data.data]);
-        setItemsCol1((prevItems) => [
-          ...prevItems,
-          ...res.data.data.slice(0, 4),
-        ]);
-        setItemsCol2((prevItems) => [
-          ...prevItems,
-          ...res.data.data.slice(4, 8),
-        ]);
-        setItemsCol3((prevItems) => [
-          ...prevItems,
-          ...res.data.data.slice(8, 12),
-        ]);
+        splitData(res.data.data);
         res.data.data.length > 0 ? setHasMore(true) : setHasMore(false);
       })
       .catch((err) => console.log(err));
@@ -80,21 +81,21 @@ const ArtWorkDetails = () => {
 
   return (
     <ArtWorkPageWrapper>
-      {!isLoading && items.length && (
+      {!isLoading && itemsCol1.length && (
         <>
           <InfiniteScroll
-            dataLength={items.length}
+            dataLength={[...itemsCol1, ...itemsCol2, ...itemsCol3].length}
             next={fetchMoreData}
             hasMore={hasMore}
-            loader={<LoadMore msg="loading more" replacable="..."/>}
+            loader={<LoadMore msg="loading more" replacable="..." />}
             endMessage={
-              <LoadMore msg="Yay! You have seen it all" replacable="!"/>
+              <LoadMore msg="Yay! You have seen it all" replacable="!" />
             }
           >
             <div className="page__content">
-              <div className="page__header">{items[0].artwork_type_title}s</div>
+              <div className="page__header">{itemsCol1[0].artwork_type_title}s</div>
               <div className="artwork__container">
-                 <div className="scroll_reveal_col">
+                <div className="scroll_reveal_col">
                   {itemsCol1.map((pieceOfArt) => {
                     return (
                       <div className="art__piece_card" key={pieceOfArt.id}>
