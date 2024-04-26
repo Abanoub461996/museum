@@ -1,12 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { TypeListWrapper } from "./TypesList.styles";
 import { useScramble } from "use-scramble";
 import { useNavigate } from "react-router";
 import TypeCard from "./TypeCard/TypeCard";
 import { useQuery } from "@tanstack/react-query";
-import axiosInstance, { noLoaderInstance } from "../../services/api/axiosInstance";
-import SearchBar from "../../elements/SearchBar/SearchBar";
-import { TiArrowRightOutline } from "react-icons/ti";
+import axiosInstance from "../../services/api/axiosInstance";
 
 const TypesList = () => {
   const navigate = useNavigate();
@@ -35,7 +33,6 @@ const TypesList = () => {
   const {
     data: artWorkTypes,
     isLoading,
-    isFetched,
   } = useQuery({
     queryKey: [`artwork-types-list`],
     queryFn: async () => {
