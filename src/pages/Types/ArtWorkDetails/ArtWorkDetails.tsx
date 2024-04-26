@@ -45,7 +45,7 @@ const ArtWorkDetails = () => {
   });
   useEffect(() => {
     if (status === "success") {
-      setHasMore(artWorkTypeEx.total_pages >2)
+      setHasMore(artWorkTypeEx.pagination.total_pages >2)
       setItems([...artWorkTypeEx.data]);
       setItemsCol1(artWorkTypeEx.data.slice(0, 4));
       setItemsCol2(artWorkTypeEx.data.slice(4, 8));

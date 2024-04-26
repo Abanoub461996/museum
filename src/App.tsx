@@ -36,6 +36,10 @@ function App() {
               <Route index={true} element={<TypesList />} />
               <Route path=":id" element={<ArtistWork />} />
             </Route>
+            <Route path="categories" element={<Outlet />}>
+              {/* <Route index={true} element={<TypesList />} /> */}
+              <Route path=":id" element={<ArtistWork />} />
+            </Route>
           </Route>
         </Routes>
       </HashRouter>
