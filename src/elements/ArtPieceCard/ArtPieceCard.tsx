@@ -9,7 +9,7 @@ const ArtPieceCard = ({ pieceOfArt }) => {
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
   const navigate = useNavigate();
   const goTo = (id: string) => {
-    navigate(`${id}`);
+    navigate(`/artwork_piece/${id}`);
   };
   return (
     <ArtPieceWrapper
@@ -39,7 +39,7 @@ const ArtPieceCard = ({ pieceOfArt }) => {
       </div>
       <div className="art__piece_overlay">
         <div className="art__piece_details">
-          <div className="art__piece_title font-lobster">
+          <div className="art__piece_title font-lobster" onClick={()=>goTo(pieceOfArt.id)}>
             {pieceOfArt.title}
           </div>
           {pieceOfArt.artist_title && <div className="flex justify-center mb-1 items-center gap-2">
